@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  
+    <link href="css/rssfeeder.css" rel="stylesheet" type="text/css"/>
+    <script src="assets/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="assets/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="assets/knockout-3.3.0.js" type="text/javascript"></script>
+    <script src="js/rssFeederData.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+ <section class="page-header">
+      <h1 class="project-name">Friends News updates with Angular</h1>
+      <h2 class="project-tagline">Friends News updates with Angular</h2>
+      <a href="https://github.com/umarethinar/SocialNews class="btn">View on GitHub</a>
+      <a href="https://github.com/umarethina/SocialNews/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/umarethina/SocialNews/tarball/master" class="btn">Download .tar.gz</a>
+      
+    </section>
+    
+<h1>Friends News updates with Angular</h1>
+
+<div class="mainDiv">
+
+    <div class="inputDiv">
+            <!--<input id="feedUrlInput" class="searchInput" type="list" data-bind="value: channelId"/>-->
+            <!--<a class="link loadFeed" >Filter By Channel ID</a>-->
+            <!--<select data-bind='options: channelId, optionsCaption: "Filter by channel ID...",  value: url , event:{ change: channelChanged}'> </select>-->
+
+           <select class="inputChannelId" data-bind='options: channelId, optionsCaption: "Filter by channel ID...",  value: url'> </select>
+        </div>
+
+    <div id="feed">
+       <ul id="feedList" data-bind="template: {name: 'feedItemTemplate', foreach: entries}" class="feedList">
+        </ul>
+
+        <script id="feedItemTemplate" type="text/html">
+            <li class="feedListItem">
+                <a href="">
+                    <img class= "itemImage" data-bind="attr:{src: thumbnails.default.url}" />
+                </a>
+                <span class="itemContainer">
+                    <a class="link" href="${link}" target="_blank">${title}</a>
+                    <label class="itemDate">${publishedAt}</label>
+                    <p class="itemcontent">${description}</p>
+                </span>
+
+            </li>
+        </script>
+    </div>
+</div>
+</body>
+</html>
