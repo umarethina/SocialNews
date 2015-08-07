@@ -15,25 +15,25 @@ app.controller('AuthCtrl', function ($scope, $rootScope, $location, Auth) {
     });
   };
 
-  $scope.logout = function(){
+  $scope.logout = function () {
     Auth.logout($scope.user).then(function (user) {
-          $rootScope.$broadcast('logout2', $scope.name);
-          $location.path('/');
-        });
+      $rootScope.$broadcast('logout2', $scope.name);
+      $location.path('/');
+    });
   };
 
   $scope.register = function () {
-    Auth.register($scope.user).then(function(user) {
-      return Auth.login($scope.user).then(function() {
-			  user.username = $scope.user.username;
+    Auth.register($scope.user).then(function (user) {
+      return Auth.login($scope.user).then(function () {
+        user.username = $scope.user.username;
         return Auth.createProfile(user);
 
-      }).then(function() {
+      }).then(function () {
         $location.path('/');
       });
-    }).then(function() {
-            $location.path('/');
-          });
+    }).then(function () {
+      $location.path('/')
+    });
   };
 
 });

@@ -11,19 +11,17 @@ app.factory('Auth', function ($firebaseAuth, $firebaseObject, FIREBASE_URL, $roo
   var Auth = {
     register: function (user) {
       if (user != undefined) {
-        console.info("Inside register create user");
         return auth.$createUser({email: user.email, password: user.password});
       }
     },
     createProfile: function (user) {
       var profile = {
         username: user.username,
-        md5_hash: user.md5_hash
+        md5_hash: user.md5_hash ? user.md5_hash : "test"
       }
 
-      var id = (auth.$getAuth('user')).uid.toString();
-      var value = [];
-      value[id] = profile ;
+      var value = {};
+      value[(auth.$getAuth('user')).uid.toString()] = profile;
       return ref.child('profile').set(value);
     },
     login: function (user) {
@@ -35,7 +33,7 @@ app.factory('Auth', function ($firebaseAuth, $firebaseObject, FIREBASE_URL, $roo
         }).then(function (authData) {
           console.log(authData);
         }).catch(function (error) {
-          console.log(err);
+          console.log(error);
 
         });
       }
@@ -56,15 +54,13 @@ app.factory('Auth', function ($firebaseAuth, $firebaseObject, FIREBASE_URL, $roo
   };
 
   $rootScope.$on('login1', function(e, user) {
-    console.info("Auth Login called");
     angular.copy(user, Auth.user);
     Auth.user.profile = $firebaseObject(ref.child('profile').child(auth.$getAuth('user').uid));
-
-    console.log(Auth.user);
+    console.info("My user info when login");
+    console.info(Auth.user);
   });
 
   $rootScope.$on('logout2', function() {
-    console.info("Auth Logout called");
     if(Auth.user && Auth.user.profile) {
       Auth.user.profile.$destroy();
     }
